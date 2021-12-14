@@ -2,9 +2,9 @@
 exports.up = function(knex) {
     return knex.schema.createTable('users', function(table){
         table.increments();
-        table.string('username');
-        table.unique('email');
-        table.string('password');
+        table.string('username').notNullable();
+        table.string('email').notNullable();
+        table.string('password').notNullable();
         table.timestamps(true, true);
 
     });
