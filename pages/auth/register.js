@@ -9,20 +9,30 @@ export default function Register () {
         email: "",
         password: "",
      });
+
+    //status message
+    const [status, setStatus] = useState('register dulu gan');
     
     //registerHandler
     async function registerHandler(e){
         e.preventDefault();
         
+        //status message
+        setStatus('loading')
+
         const registerReq = await fetch('/api/auth/register',{
             method: 'POST',
             body: JSON.stringify(fields),
             headers: {'Content-Type': 'application/json'}
         });
 
+        //status message
+        if (!registerReq.ok) return setStatus('error', registerReq.status);
+
         const registerRes = await registerReq.json()
 
-        console.log(registerRes);
+        //status message
+        setStatus('Success')
 
 
     };
@@ -47,8 +57,11 @@ export default function Register () {
                 <br />
                 <input onChangeCapture={fieldHandler.bind(this)} type="password" name="password" placeholder="Password"/>
                 <button type="submit"> 
-                    Register 
+                    Register
                 </button>
+
+                {/* message status */}
+                <div> Status: {status} </div>
             </form>
         </div>
     )

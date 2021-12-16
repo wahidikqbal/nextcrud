@@ -9,8 +9,10 @@ export default async function handler (req, res) {
     //mengambil username dan password
     const { username, password } = req.body
 
-    //check username
+    //init checkUser
     const checkUser = await db('users').where({ 'username': username}).first();
+    
+    //check username
     if(!checkUser) return res.status(401).end();
     console.log([checkUser.username, checkUser.password]);
 
@@ -19,6 +21,7 @@ export default async function handler (req, res) {
     if(!checkPassword) return res.status(401).end();
     console.log(checkPassword);
 
+    //give token if user and password correct
     const token =   jwt.sign({ id : checkUser.id, username: checkUser.username},
                     process.env.JWT_SIGNATURE, 
                     {expiresIn: '1 days'});
