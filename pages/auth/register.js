@@ -56,6 +56,7 @@ export default function Register () {
                 <input onChangeCapture={fieldHandler.bind(this)} type="text" name="email" placeholder="Email" />
                 <br />
                 <input onChangeCapture={fieldHandler.bind(this)} type="password" name="password" placeholder="Password"/>
+                <br />
                 <button type="submit"> 
                     Register
                 </button>
