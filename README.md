@@ -43,3 +43,4 @@ fullstacknextjs
 table:
 post
 users
+
