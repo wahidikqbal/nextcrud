@@ -34,4 +34,15 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-test branch
+mysql:
+root, root
+nextjs, Nextjs123##
+
+database:
+fullstacknextjs
+
+table:
+post
+users
+
+
