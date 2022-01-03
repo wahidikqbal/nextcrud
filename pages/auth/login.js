@@ -1,5 +1,4 @@
-import jsonwebtoken from "jsonwebtoken";
-import react from "react";
+import Cookies from "js-cookie";
 import { useState } from "react/cjs/react.development";
 
 export default function login () {
@@ -28,9 +27,12 @@ export default function login () {
         });
 
         if(!loginReq.ok) return setstatus('Login gagal', loginReq.status)
+
         const loginRes = await loginReq.json()
 
-        console.log(loginRes)
+        console.log(loginRes);
+        
+        Cookies.set('x-Token', loginRes.token);
 
         //status message
         setstatus('Login Success')
