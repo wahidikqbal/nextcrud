@@ -1,8 +1,26 @@
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import nookies from "next-cookies"
 
-export default function login () {
+export async function getServerSideProps(ctx) {
+
+    const allCookies = nookies(ctx)
+    console.log(allCookies)
+
+    if(allCookies.xToken) 
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/posts'
+                }
+        }
+    return {
+      props: {}, // will be passed to the page component as props
+    }
+  }
+
+export default function Login () {
 
     //init field and setfield
     const [field, setfield] = useState({
@@ -14,12 +32,12 @@ export default function login () {
     const [status, setstatus] = useState('Login dulu gan')
 
     //push ke halaman post jika ada token
-    useEffect( () => {
-        const token = Cookies.get('x-Token');
+    // useEffect( () => {
+    //     const token = Cookies.get('xToken');
 
-        if(token) return Router.push('/posts')
-    }, []);
-
+    //     if(token) return Router.push('/posts')
+    // }, []);
+    
     //function loginHandler
     async function loginHandler(e){
         e.preventDefault();
@@ -41,7 +59,10 @@ export default function login () {
         console.log(loginRes);
         
         //set token in cookie
-        Cookies.set('x-Token', loginRes.token);
+        Cookies.set('xToken', loginRes.token);
+
+        //push ke halaman posts
+        Router.push('/posts')
 
         //status message
         setstatus('Login Success')
