@@ -32,6 +32,7 @@ export default function login () {
 
         console.log(loginRes);
         
+        //set token in cookie
         Cookies.set('x-Token', loginRes.token);
 
         //status message
