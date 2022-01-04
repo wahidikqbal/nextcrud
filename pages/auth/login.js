@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
-import { useState } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
+import Router from "next/router";
 
 export default function login () {
 
@@ -11,6 +12,13 @@ export default function login () {
 
     //status message
     const [status, setstatus] = useState('Login dulu gan')
+
+    //push ke halaman post jika ada token
+    useEffect( () => {
+        const token = Cookies.get('x-Token');
+
+        if(token) return Router.push('/posts')
+    }, []);
 
     //function loginHandler
     async function loginHandler(e){
