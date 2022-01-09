@@ -1,4 +1,4 @@
-import { authPage } from "../middlewares/authPage"
+import { authPage, myToken } from "../middlewares/authPage"
 import nookies from "next-cookies"
 
 export async function getServerSideProps(ctx) {

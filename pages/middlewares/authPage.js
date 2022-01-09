@@ -1,7 +1,9 @@
+import nookies from "next-cookies"
+
 export function unauthPage (ctx) {
     
     return new Promise(resolve => {
-        const redir = function () {
+        const redirToPosts = function () {
             return {
                 
                 redirect: {
@@ -10,7 +12,7 @@ export function unauthPage (ctx) {
                 }
             }
         }
-        return resolve(redir())
+        return resolve(redirToPosts())
     })
 }
 
@@ -18,7 +20,7 @@ export function unauthPage (ctx) {
 export function authPage (ctx) {
     
     return new Promise(resolve => {
-        const redir = function () {
+        const redirToLogin = function () {
             return {
                 
                 redirect: {
@@ -27,7 +29,7 @@ export function authPage (ctx) {
                 }
             }
         }
-        return resolve(redir())
+        return resolve(redirToLogin())
     })
 }
 
