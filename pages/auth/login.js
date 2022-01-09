@@ -1,20 +1,19 @@
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import { unauthPage } from "../../pages/middlewares/authPage"
 import nookies from "next-cookies"
 
 export async function getServerSideProps(ctx) {
-
+    
+    //REDIRECT LANGSUNG JIKA ADA COOKIE//
+    //console.log(await unPage(ctx))
     const allCookies = nookies(ctx)
-    console.log(allCookies)
-
+    // console.log(allCookies)
     if(allCookies.xToken) 
-        return {
-            redirect: {
-                permanent: false,
-                destination: '/posts'
-                }
-        }
+        return await unauthPage(ctx)
+
+
     return {
       props: {}, // will be passed to the page component as props
     }
@@ -56,7 +55,7 @@ export default function Login () {
 
         const loginRes = await loginReq.json()
 
-        console.log(loginRes);
+        //console.log(loginRes);
         
         //set token in cookie
         Cookies.set('xToken', loginRes.token);

@@ -1,5 +1,21 @@
 import React, {useState} from "react";
+import nookies from "next-cookies"
+import { unauthPage } from "../middlewares/authPage";
 
+export async function getServerSideProps(ctx) {
+    
+    //REDIRECT LANGSUNG JIKA ADA COOKIE//
+    //console.log(await unPage(ctx))
+    const allCookies = nookies(ctx)
+    // console.log(allCookies)
+    if(allCookies.xToken) 
+        return await unauthPage(ctx)
+
+
+    return {
+      props: {}, // will be passed to the page component as props
+    }
+  }
 
 export default function Register () {
 
