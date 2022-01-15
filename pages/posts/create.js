@@ -1,6 +1,7 @@
 import { useState } from "react";
 import nookies from "next-cookies"
 import Router from "next/router";
+import { authPage } from "../middlewares/authPage";
 
 export async function getServerSideProps(ctx) {
     
