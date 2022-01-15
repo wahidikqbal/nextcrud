@@ -1,13 +1,13 @@
-import { authPage, myToken } from "../middlewares/authPage"
+import { authPage} from "../middlewares/authPage"
 import nookies from "next-cookies"
 
 export async function getServerSideProps(ctx) {
     
-    //REDIRECT LANGSUNG JIKA ADA COOKIE//
-    //console.log(await authPage(ctx))
+//     //REDIRECT LANGSUNG JIKA ADA COOKIE//
+//     //console.log(await authPage(ctx))
     const allCookies = nookies(ctx)
     const token = allCookies.xToken
-    //console.log(token)
+//     //console.log(token)
 
     if(!token) 
         return await authPage(ctx)
@@ -35,7 +35,9 @@ export default function postIndex (props) {
             <h1> Halaman Posts</h1>
             { props.posts.map(post => {
                 return (
-                    <div key={post.id}> {post.title} , {post.content} </div>
+                    <div key={post.id}> 
+                        {post.title} , {post.content} 
+                    </div>
                 )
             }) }
         </div>

@@ -1,5 +1,3 @@
-import nookies from "next-cookies"
-
 export function unauthPage (ctx) {
     
     return new Promise(resolve => {
