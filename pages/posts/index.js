@@ -40,6 +40,10 @@ export default function postIndex (props) {
                     </div>
                 )
             }) }
+
+            <h4>
+                <a href='/posts/create'>Create post</a>
+            </h4>
         </div>
     )
 }

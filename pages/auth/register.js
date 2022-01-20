@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import nookies from "next-cookies"
 import { unauthPage } from "../middlewares/authPage";
+import Router from "next/router";
 
 export async function getServerSideProps(ctx) {
     
@@ -43,14 +44,16 @@ export default function Register () {
         });
 
         //status message
-        if (!registerReq.ok) return setStatus('error', registerReq.status);
+        if (!registerReq.ok) 
+            return setStatus('error', registerReq.status)
+            else(
+                Router.push('/auth/login')
+            );
 
         const registerRes = await registerReq.json()
 
         //status message
         setStatus('Success')
-
-
     };
 
     function fieldHandler(e){
@@ -79,6 +82,8 @@ export default function Register () {
 
                 {/* message status */}
                 <div> Status: {status} </div>
+
+                
             </form>
         </div>
     )
