@@ -10,8 +10,8 @@ export async function getServerSideProps(ctx) {
     const allCookies = nookies(ctx)
     const token = allCookies.xToken
 //     //console.log(token)
-
-
+    if(!token) 
+        return await authPage(ctx)
 
 const postReq = await fetch('http://localhost:3000/api/posts', {
     headers: {

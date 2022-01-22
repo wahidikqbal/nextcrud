@@ -1,3 +1,4 @@
+import React, {useState} from "react"
 import { authPage} from "../middlewares/authPage"
 import nookies from "next-cookies"
 
@@ -31,6 +32,10 @@ export async function getServerSideProps(ctx) {
 
 export default function postIndex (props) {
     
+    const [posts, setPosts ] = useState(props.posts)
+    //console.log(posts)
+
+    //DELETE HANDLER
     async function deleteHandler(id, e) {
         
         e.preventDefault();
@@ -49,9 +54,15 @@ export default function postIndex (props) {
             });
             const res = await deletePost.json()
             console.log(res)
+            
+            const postFiltered = posts.filter(post => {
+                return post.id !== id && post
+            })
+            setPosts(postFiltered)
         }
     }
     
+    //EDIT HANDLER
     async function editHandler(id, e){
         e.preventDefault()
     }
@@ -61,7 +72,7 @@ export default function postIndex (props) {
         <div>
             <h1> Halaman Posts</h1>
 
-            {props.posts.map(post => (
+            {posts.map(post => (
                 <div key={post.id}>
                     <h3> {post.title} </h3>
                     <p> {post.content} </p>
