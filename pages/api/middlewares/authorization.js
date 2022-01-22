@@ -16,7 +16,7 @@ export default function authorization (req, res) {
             authSplit[1]
         ]
     
-        console.log(authSplit);
+        //console.log(authSplit);
         if(authType !== 'Bearer') return res.status(401).end();
 
         return jwt.verify(authToken, process.env.JWT_SIGNATURE, function(err, decoded){
